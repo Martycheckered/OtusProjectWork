@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Epam" verbose="1" parallel="methods" thread-count="2" >
+    <test name="One" >
+        <classes>
+            <class name="EpamTest" />
+        </classes>
+    </test>
+
+
+</suite>
