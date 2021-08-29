@@ -52,14 +52,6 @@ public class EpamTest extends BaseHooks {
 
          softAssert.assertAll();
 
-        //переписать? тестовая логика внутри page object
-        /* assertAll("Event card",
-                () -> assertTrue(eventsPage.isEventCardContainsEventLanguage()),
-                () -> assertTrue(eventsPage.isEventCardContainsEventName()),
-                () -> assertTrue(eventsPage.isEventCardContainsEventDate()),
-                () -> assertTrue(eventsPage.isEventCardContainsRegistrationStatus()),
-                () -> assertTrue(eventsPage.isEventCardContainsSpeakers())
-                );*/
         logger.info("Event card has language, name, date, status, speakers");
 
     }
@@ -156,21 +148,12 @@ public class EpamTest extends BaseHooks {
                 break;
             }
         }
-        //переменная добавлена, т.к. компилятор в блоке assertAll ругается, что isTagPresent не final
-        //boolean resultingValue = isTagPresent;
 
         softAssert.assertTrue(isTagPresent);
         softAssert.assertTrue(isSubstringPresentInString(eventLocation,"Belarus"));
         softAssert.assertEquals("ENGLISH", eventLanguage);
 
         softAssert.assertAll();
-
-
-        /*assertAll("Talks card",
-                () -> assertTrue(resultingValue),
-                () -> assertTrue(isSubstringPresentInString(eventLocation,"Belarus")),
-                () -> assertEquals("ENGLISH", eventLanguage)
-        );*/
 
     }
 

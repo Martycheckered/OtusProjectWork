@@ -20,7 +20,7 @@ public class BaseHooks {
 
     @BeforeMethod
     public  void setup() {
-        driver = WebDriverFactory.createDriver(Browsers.CHROME);
+        driver = WebDriverFactory.createDriver(Browsers.FIREFOX);
 
         if (driver != null) {
             driver.manage().deleteAllCookies();
