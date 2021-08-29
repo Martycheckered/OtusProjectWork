@@ -10,6 +10,7 @@ import pages.VideoPage;
 import utils.BaseHooks;
 import utils.DateValidator;
 import utils.EventType;
+import utils.Helpers;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,7 +31,7 @@ public class EpamTest extends BaseHooks {
 
         String counterNumber = eventsPage.getEventsCounterValue(EventType.UPCOMING);
         String cards = eventsPage.getAmountOfEventsCards();
-        takeScreenShot("Будущие мероприятия");
+        Helpers.takeScreenShot(driver, "Будущие мероприятия");
         assertEquals(cards, counterNumber);
 
     }
@@ -42,7 +43,7 @@ public class EpamTest extends BaseHooks {
         MainPage mainPage = new MainPage(driver);
         EventsPage eventsPage = mainPage.open().goToEventsTab();
         eventsPage.goToPastEventsSubTab();
-        takeScreenShot("Карточки прошедших мероприятий");
+        Helpers.takeScreenShot(driver, "Карточки прошедших мероприятий");
 
          softAssert.assertTrue(eventsPage.isEventCardContainsEventLanguage());
          softAssert.assertTrue(eventsPage.isEventCardContainsEventName());
@@ -65,7 +66,7 @@ public class EpamTest extends BaseHooks {
         EventsPage eventsPage = mainPage.open().goToEventsTab();
         eventsPage.goToUpcomingEventsSubTab();
 
-        takeScreenShot("Будущие мероприятия");
+        Helpers.takeScreenShot(driver, "Будущие мероприятия");
 
         List <String> eventDates = eventsPage.collectDatesOfEventsFromCards();
         for (String s: eventDates ) {
@@ -110,7 +111,7 @@ public class EpamTest extends BaseHooks {
         long listSum = results.stream()
                 .mapToLong(Integer::longValue)
                 .sum();
-        takeScreenShot("Мероприятия в " + eventLocation);
+        Helpers.takeScreenShot(driver, "Мероприятия в " + eventLocation);
 
         assertEquals(expected, listSum);
 
@@ -134,7 +135,7 @@ public class EpamTest extends BaseHooks {
         jse.executeScript("window.scrollBy(0,250)");
 
         EventDetailsPage eventDetailsPage = videoPage.clickOnFirstArticle();
-        takeScreenShot("Детали по выбранному докладу");
+        Helpers.takeScreenShot(driver, "Детали по выбранному докладу");
 
         String eventLocation = eventDetailsPage.getLocationInfo();
         String eventLanguage = eventDetailsPage.getLanguageInfo();
@@ -143,14 +144,14 @@ public class EpamTest extends BaseHooks {
         boolean isTagPresent = false;
         for (WebElement tag : eventTags) {
             logger.debug("Получено значение: " + tag.getText());
-            if (isSubstringPresentInString(tag.getText(), "Testing")) {
+            if (Helpers.isSubstringPresentInString(tag.getText(), "Testing")) {
                 isTagPresent = true;
                 break;
             }
         }
 
         softAssert.assertTrue(isTagPresent);
-        softAssert.assertTrue(isSubstringPresentInString(eventLocation,"Belarus"));
+        softAssert.assertTrue(Helpers.isSubstringPresentInString(eventLocation,"Belarus"));
         softAssert.assertEquals("ENGLISH", eventLanguage);
 
         softAssert.assertAll();
@@ -167,15 +168,15 @@ public class EpamTest extends BaseHooks {
         String searchingWord = "QA";
 
         videoPage.search(searchingWord);
-      //Исправить в будущем
+
         Thread.sleep(1000);
 
-        takeScreenShot("Результаты поиска по слову " + searchingWord);
+        Helpers.takeScreenShot(driver, "Результаты поиска по слову " + searchingWord);
         List <String> articleNames = videoPage.collectArticleNamesFromCards();
 
         for (String s: articleNames) {
             logger.info(s);
-            assertTrue(isSubstringPresentInString(s, searchingWord));
+            assertTrue(Helpers.isSubstringPresentInString(s, searchingWord));
 
         }
 

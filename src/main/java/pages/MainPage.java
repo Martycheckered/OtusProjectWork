@@ -26,14 +26,14 @@ public class MainPage extends GeneralPage {
     }
     @Step("Переход на вкладку \"Events\"")
     public EventsPage goToEventsTab() {
-        clickOnByCss(EVENTS_TAB_LOCATOR);
+        clickOnBy(By.cssSelector(EVENTS_TAB_LOCATOR));
 
         logger.info("Transfer to Events tab");
         return new EventsPage(driver);
     }
     @Step("Переход на вкладку \"Video\"")
     public VideoPage goToVideoTab() {
-        clickOnByCss(VIDEO_TAB_LOCATOR);
+        clickOnBy(By.cssSelector(VIDEO_TAB_LOCATOR));
 
         logger.info("Transfer to Video tab");
         return new VideoPage(driver);

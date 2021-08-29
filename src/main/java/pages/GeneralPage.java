@@ -6,8 +6,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -20,28 +18,20 @@ public abstract class GeneralPage {
 
     public GeneralPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(this.driver, this);
     }
 
-    public void clickOnByXpath (String locator) {
+    public void clickOnBy (By selector) {
         waitUntilLoaderDisappears();
 
-        waitUntilElementIsClickable(By.xpath(locator));
-        findElement(By.xpath(locator)).click();
-
-        waitUntilLoaderDisappears();
-    }
-    public void clickOnByCss (String selector) {
-        waitUntilLoaderDisappears();
-
-        waitUntilElementIsClickable(By.cssSelector(selector));
-        findElement(By.cssSelector(selector)).click();
+        waitUntilElementIsClickable(selector);
+        findElement(selector).click();
 
         waitUntilLoaderDisappears();
     }
+
     @Step("Нажатие на кнопку принять Cookie")
     public void acceptCookie() {
-        clickOnByCss("button#onetrust-accept-btn-handler");
+        clickOnBy(By.cssSelector("button#onetrust-accept-btn-handler"));
 
     }
 

@@ -23,7 +23,7 @@ public class EventsPage extends GeneralPage {
     private static final String EVENT_SPEAKER_LOCATOR = "//div[contains(@class,'evnt-speaker')]";
     private static final String LOCATION_FILTER_LOCATOR = "//span[contains(@class, 'evnt-filter-text') and contains(text(), \"Location\")]";
 
-    final String filterValue = "label[data-value=\"%s\"]";
+    private static final String filterValue = "label[data-value=\"%s\"]";
 
     public EventsPage(WebDriver driver) {
         super(driver);
@@ -52,12 +52,12 @@ public class EventsPage extends GeneralPage {
 
     @Step("Переключение на дочернюю вкладку \"Past Events\"")
     public void goToPastEventsSubTab() {
-        clickOnByXpath(PAST_EVENTS_TAB_LOCATOR);
+        clickOnBy(By.xpath(PAST_EVENTS_TAB_LOCATOR));
         logger.info("Past events subtab was clicked");
     }
     @Step("Переключение на дочернюю вкладку \"Upcoming Events\"")
     public void goToUpcomingEventsSubTab() {
-        clickOnByXpath(UPCOMING_EVENTS_TAB_LOCATOR);
+        clickOnBy(By.xpath(UPCOMING_EVENTS_TAB_LOCATOR));
         logger.info("Upcoming events subtab was clicked");
     }
     @Step("Проверка, содержит ли карточка события язык")
@@ -127,8 +127,8 @@ public class EventsPage extends GeneralPage {
     @Step("Выбрать местоположение: {locationName}")
     public void selectLocationByCssSelector (String locationName) {
         String finalLocator = String.format(filterValue, locationName);
-        clickOnByXpath(LOCATION_FILTER_LOCATOR);
-        clickOnByCss(finalLocator);
+        clickOnBy(By.xpath(LOCATION_FILTER_LOCATOR));
+        clickOnBy(By.cssSelector(finalLocator));
         logger.info("Selected ---" + locationName);
 
     }
