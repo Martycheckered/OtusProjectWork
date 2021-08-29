@@ -20,11 +20,11 @@ public class BaseHooks {
 
     @BeforeMethod
     public  void setup() {
-        driver = WebDriverFactory.createDriver(Browsers.FIREFOX);
+       driver = WebDriverFactory.create(System.getProperty("browser"), System.getProperty("options"));
 
         if (driver != null) {
             driver.manage().deleteAllCookies();
-            driver.manage().window().maximize();
+            //driver.manage().window().maximize();
         }
         logger.info("Driver is up");
     }
