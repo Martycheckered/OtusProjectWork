@@ -117,11 +117,7 @@ public class DateValidator {
         Date parsedDate;
         try {
             parsedDate = ft.parse(dateString);
-            /*if(dateNow.before(parsedDate)) {
-                results.add(0);
-            }  else {
-                results.add(1);
-            }*/
+
         }
         catch (ParseException e) {
             System.out.println("Can't parse this string to Date : " + dateString);

@@ -26,12 +26,12 @@ public class EpamTest extends BaseHooks {
     description = "Просмотр предстоящих мероприятий")
     @Description("Проверка количества будущих мероприятий по счетчику")
     public void checkAmountOfFutureEventsTest () throws IOException {
-        MainPage mainPage = new MainPage(driver);
+        MainPage mainPage = new MainPage(getDriver());
         EventsPage eventsPage = mainPage.open().goToEventsTab();
 
         String counterNumber = eventsPage.getEventsCounterValue(EventType.UPCOMING);
         String cards = eventsPage.getAmountOfEventsCards();
-        Helpers.takeScreenShot(driver, "Будущие мероприятия");
+        Helpers.takeScreenShot(getDriver(), "Будущие мероприятия");
         assertEquals(cards, counterNumber);
 
     }
@@ -40,10 +40,10 @@ public class EpamTest extends BaseHooks {
           description = "Просмотр прошлых мероприятий")
     @Description("Проверка наличия на карточках прошлых мероприятий атрибутов: язык, имя, дата, статус, спикеры")
     public void validatePastEventsCardsTest () throws IOException {
-        MainPage mainPage = new MainPage(driver);
+        MainPage mainPage = new MainPage(getDriver());
         EventsPage eventsPage = mainPage.open().goToEventsTab();
         eventsPage.goToPastEventsSubTab();
-        Helpers.takeScreenShot(driver, "Карточки прошедших мероприятий");
+        Helpers.takeScreenShot(getDriver(), "Карточки прошедших мероприятий");
 
          softAssert.assertTrue(eventsPage.isEventCardContainsEventLanguage());
          softAssert.assertTrue(eventsPage.isEventCardContainsEventName());
@@ -62,11 +62,11 @@ public class EpamTest extends BaseHooks {
     description = "Валидация дат предстоящих мероприятий")
     @Description("Проверка корректности дат будущих мероприятий")
     public void validateFutureEventsDatesTest () throws IOException {
-        MainPage mainPage = new MainPage(driver);
+        MainPage mainPage = new MainPage(getDriver());
         EventsPage eventsPage = mainPage.open().goToEventsTab();
         eventsPage.goToUpcomingEventsSubTab();
 
-        Helpers.takeScreenShot(driver, "Будущие мероприятия");
+        Helpers.takeScreenShot(getDriver(), "Будущие мероприятия");
 
         List <String> eventDates = eventsPage.collectDatesOfEventsFromCards();
         for (String s: eventDates ) {
@@ -87,9 +87,9 @@ public class EpamTest extends BaseHooks {
     @Test (testName = "Проверка дат мероприятий в конкретном городе",
     description = "Проверка дат мероприятий в конкретном городе")
     @Description("Проверка дат мероприятий, прошедших в Канаде")
-    public void checkCanadaPastEventsTest () throws InterruptedException, IOException {
+    public void checkCanadaPastEventsTest () {
 
-        MainPage mainPage = new MainPage(driver);
+        MainPage mainPage = new MainPage(getDriver());
         EventsPage eventsPage = mainPage.open().goToEventsTab();
         eventsPage.goToPastEventsSubTab();
         String eventLocation = "Canada";
@@ -111,7 +111,7 @@ public class EpamTest extends BaseHooks {
         long listSum = results.stream()
                 .mapToLong(Integer::longValue)
                 .sum();
-        Helpers.takeScreenShot(driver, "Мероприятия в " + eventLocation);
+        Helpers.takeScreenShot(getDriver(), "Мероприятия в " + eventLocation);
 
         assertEquals(expected, listSum);
 
@@ -121,7 +121,7 @@ public class EpamTest extends BaseHooks {
             description = "Фильтрация докладов")
     @Description("Проверка фильтрации докладов")
     public void lectureFiltrationTest () throws IOException {
-        MainPage mainPage = new MainPage(driver);
+        MainPage mainPage = new MainPage(getDriver());
         VideoPage videoPage = mainPage.open().goToVideoTab();
 
         videoPage.clickMoreFilters();
@@ -131,11 +131,11 @@ public class EpamTest extends BaseHooks {
         videoPage.makeFiltration("Language", "ENGLISH");
 
         //Прокрутка, чтобы можно было кликнуть на карточку после фильтрации
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        JavascriptExecutor jse = (JavascriptExecutor)getDriver();
         jse.executeScript("window.scrollBy(0,250)");
 
         EventDetailsPage eventDetailsPage = videoPage.clickOnFirstArticle();
-        Helpers.takeScreenShot(driver, "Детали по выбранному докладу");
+        Helpers.takeScreenShot(getDriver(), "Детали по выбранному докладу");
 
         String eventLocation = eventDetailsPage.getLocationInfo();
         String eventLanguage = eventDetailsPage.getLanguageInfo();
@@ -162,7 +162,7 @@ public class EpamTest extends BaseHooks {
             description = "Поиск докладов по ключевому слову")
     @Description("Проверка поиска по ключевому слову QA")
     public void searchVideoByKeyWordTest () throws InterruptedException, IOException {
-        MainPage mainPage = new MainPage(driver);
+        MainPage mainPage = new MainPage(getDriver());
         VideoPage videoPage = mainPage.open().goToVideoTab();
 
         String searchingWord = "QA";
@@ -171,7 +171,7 @@ public class EpamTest extends BaseHooks {
 
         Thread.sleep(1000);
 
-        Helpers.takeScreenShot(driver, "Результаты поиска по слову " + searchingWord);
+        Helpers.takeScreenShot(getDriver(), "Результаты поиска по слову " + searchingWord);
         List <String> articleNames = videoPage.collectArticleNamesFromCards();
 
         for (String s: articleNames) {

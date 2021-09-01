@@ -38,7 +38,6 @@
                     <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
                     <systemPropertyVariables>
                         <browser>${browser}</browser>
-                       <!-- <parallel></parallel>-->
 
                         <options>${options}</options>
                     </systemPropertyVariables>
@@ -67,7 +66,7 @@
                 <version>${allure-maven.version}</version>
                 <configuration>
                     <reportVersion>2.7.0</reportVersion>
-                    <!--                    <allureDownloadUrl>https://github.com/allure-framework/allure2/releases/download/2.7.0/allure-2.7.0.zip</allureDownloadUrl>-->
+                    <allureDownloadUrl>https://github.com/allure-framework/allure2/releases/download/2.7.0/allure-2.7.0.zip</allureDownloadUrl>
                 </configuration>
             </plugin>
         </plugins>
