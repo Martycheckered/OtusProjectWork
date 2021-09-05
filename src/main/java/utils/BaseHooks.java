@@ -20,9 +20,6 @@ public class BaseHooks {
         WebDriverFactory.create(System.getProperty("browser"), System.getProperty("options"));
         drivers.set(driver);
 
-        if (driver != null) {
-            driver.manage().deleteAllCookies();
-        }
         logger.info("Driver is up");
     }
 
